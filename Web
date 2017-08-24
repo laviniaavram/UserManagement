@@ -1,0 +1,465 @@
+//home.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+	<meta charset="utf-8" />
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/style.css">
+    <script src="/scripts/main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Users</h1>
+    <div style="text-align:center" class="container">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for First name..">
+        <table class="table" id="users_table">
+            <tr>
+                <th>UserId</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Admin</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+    </div>  
+
+    <div class="wrapper">
+        <button type="button" onclick="location.href = 'PostAndPut.html'" id="addButton">Register!</button>
+    </div>
+
+</body>
+</html>
+
+
+//postandput.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit</title>
+    <meta charset="utf-8" />
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://localhost:57286/scripts/jquery-1.9.1.js"></script>
+    <script src="/scripts/jquery.serializejson.js"></script>
+    <script src="../JSobjects/JSUser.js"></script>
+    <script src="../JSobjects/JSAddress.js"></script>
+    <script src="../JSobjects/JSPriv.js"></script>
+    <script src="/scripts/addEditJS.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/addEditPage.css">
+</head>
+
+<body>
+    <h1>Please complete the following fields!</h1>
+    <form name="myform" method='post' autocomplete="off" id="myform">
+        <p class="generalData">
+            First name:<br><input type="text" id="fname" name="FirstName" required><br>
+            Last name:<br><input type="text" id="lname" name="LastName" required><br>
+            E-mail: <br><input type="email" id="email" name="Email" required placeholder="Enter a valid email address"><br>
+            Age: <br><input type="number" id="age" name="Age" min="18" max="120" required><br>
+        </p>
+        <p class="accessData">
+            User type:<br>
+            <label> Admin <input id="IsAdmin" type="radio" name="IsAdmin" value="true"> </label>
+            <label> Not Admin <input id="IsAdmin" type="radio" name="IsAdmin" value="false"> </label>
+            <label> Undefined <input id="IsAdmin" type="radio" name="IsAdmin" value="null"> </label>
+        </p>
+        <br><br>
+        Address<br>
+        Country:<br> <input type="text" id="Country" name="Country" required><br>
+        City:<br> <input type="text" id="City" name="City" required><br>
+        Street:<br> <input type="text" id="Street" name="Street" required><br>
+        Number: <br><input type="number" id="Number" min="1" name="Number" required><br>
+        <br><br>
+        <p id="privData" style="display:none">
+            User Privilege:<br>
+            <label> Read <input id="PrivilegeId" type="radio" name="PrivilegeId" value="4"> </label>
+            <label>  Write <input id="PrivilegeId" type="radio" name="PrivilegeId" value="5" /> </label>
+            <label> Execute <input id="PrivilegeId" type="radio" name="PrivilegeId" value="6" /> </label>
+            <br><br>
+            </p>
+            <input type="button" value="Submit" onclick="addUser(this)" id="submitButton" />
+            <input type='button' value="Edit" onclick="editUser(this)" id="updateButton">
+</form>
+
+</body>
+</html>
+
+
+//JSAddress.js
+function JSAddress(Country,City,Street,Number)
+{
+    this.Country = Country;
+    this.City =City;
+    this.Street = Street;
+    this.Number = Number;
+}
+
+//JSPriv.js
+function PrivOfTheUs(PrivilegeId) {
+    this.PrivilegeId = PrivilegeId
+}
+
+
+//JSUser.js
+function JSUser(FirstName,LastName,Email,Age)
+{
+    this.FirstName = FirstName;
+    this.LastName = LastName;
+    this.Email = Email;
+    this.Age = Age;
+    AddressesOfTheUser =[];
+    PrivilegesOfTheUser = [];
+}
+
+//scripts
+//main.js
+
+var allusers;
+//display the users in home.html
+$(document).ready(function () {
+    $.getJSON("http://localhost:64012/api/users", function (data) {
+        var users_data;
+        allusers = data;
+        $.each(data, function (key, value) {
+            users_data = $('<tr/>');
+            users_data.append("<td>" + value.UserId + "</td>");
+            users_data.append("<td>" + value.FirstName + "</td>");
+            users_data.append("<td>" + value.LastName + "</td>");
+            users_data.append("<td>" + value.Email + "</td>");
+            users_data.append("<td>" + value.Age + "</td>");
+            users_data.append("<td>" + value.IsAdmin + "</td>");
+            users_data.append("<td> <button class='delbutton' id='deleteButton' onClick='popupDelete(this)'>Delete</button> <button class='editbutton' id='editButton' onclick='Redirect(this)' >Edit</button></td>");
+            $('#users_table').append(users_data);
+        });
+    });
+});
+
+function myFunction() {
+    // Declare variables 
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("users_table");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// When the user clicks on delete, open the popup
+function popupDelete(a) {
+    var table = document.getElementById("users_table");
+    var row = a.parentElement.parentElement.rowIndex;
+    var userid = table.rows[row].cells[0].innerHTML;
+    if (confirm("ALERT! If you press ok the user will be deleted!") == true) {
+        table.deleteRow(row);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("DELETE", "http://localhost:64012/api/users/" + userid, true);
+        xhttp.send();
+    }
+}
+
+
+function Redirect(b) {
+    var table = document.getElementById("users_table");
+    window.location.href = "http://localhost:57286/html/PostAndPut.html?Edit=true";
+    var row = b.parentElement.parentElement.rowIndex;
+    var userid = table.rows[row].cells[0].innerHTML;
+
+    for (var i = 0; i < allusers.length; i++) {
+        if (userid == allusers[i].UserId) {
+            sessionStorage.setItem("UserId", allusers[i].UserId);
+            sessionStorage.setItem("FirstName", allusers[i].FirstName);
+            sessionStorage.setItem("LastName", allusers[i].LastName);
+            sessionStorage.setItem("Email", allusers[i].Email);
+            sessionStorage.setItem("Age", allusers[i].Age);
+            sessionStorage.setItem("IsAdmin", allusers[i].IsAdmin);
+            for (var j = 0; j < allusers[i].AddressesOfTheUser.length; j++) {
+                sessionStorage.setItem("Country", allusers[i].AddressesOfTheUser[j].Country);
+                sessionStorage.setItem("City", allusers[i].AddressesOfTheUser[j].City);
+                sessionStorage.setItem("Street", allusers[i].AddressesOfTheUser[j].Street);
+                sessionStorage.setItem("Number", allusers[i].AddressesOfTheUser[j].Number);
+            }
+            for (var k = 0; k < allusers[i].PrivilegesOfTheUser.length; k++) {
+                sessionStorage.setItem("PrivilegeId", allusers[i].PrivilegesOfTheUser[k].PrivilegeId);
+            }
+        }
+    }
+}
+
+
+
+
+//addEditPage.js
+function addUser(form) {
+    document.getElementById("submitButton").style.display = "block";
+    var user = new JSUser();
+    var AddressesOfThUser = new JSAddress();
+    user.FirstName = document.getElementById("fname").value;
+    user.LastName = document.getElementById("lname").value;
+    user.Email = document.getElementById("email").value;
+    user.Age = document.getElementById("age").value;
+    user.IsAdmin = document.getElementById("IsAdmin").value;
+
+    var adrObj = {};
+    adrObj.Country = document.getElementById("Country").value;
+    adrObj.City = document.getElementById("City").value;
+    adrObj.Street = document.getElementById("Street").value;
+    adrObj.Number = document.getElementById("Number").value;
+    user.AddressesOfTheUser = [];
+    user.AddressesOfTheUser.push(adrObj);
+    var privObj = {};
+    privObj.PrivilegeId = document.getElementById("PrivilegeId").value;
+    user.PrivilegesOfTheUser = [];
+    user.PrivilegesOfTheUser.push(privObj);
+    $.ajax({
+        url: "http://localhost:64012/api/users",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(user),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            tempdata = data;
+            window.location.href = 'http://localhost:57286/html/home.html'
+        },
+        error: function (result) {
+            tempdata = null;
+        }
+    });  //end of the ajax call
+}
+
+
+
+$(document).ready(function () {
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has('Edit') && urlParams.get('Edit') == "true") {
+        document.getElementById("fname").value = sessionStorage.getItem("FirstName");
+        document.getElementById("lname").value = sessionStorage.getItem("LastName");
+        document.getElementById("email").value = sessionStorage.getItem("Email");
+        document.getElementById("age").value = sessionStorage.getItem("Age");
+        document.myform.IsAdmin.value = sessionStorage.getItem("IsAdmin")
+        document.getElementById("Country").value = sessionStorage.getItem("Country");
+        document.getElementById("City").value = sessionStorage.getItem("City");
+        document.getElementById("Street").value = sessionStorage.getItem("Street");
+        document.getElementById("Number").value = sessionStorage.getItem("Number");
+        document.myform.PrivilegeId.value = sessionStorage.getItem("PrivilegeId");
+    }
+    $("#myform").submit(function () {
+        return false;
+    });
+
+    $("input[type=radio]").on("click", function () {
+        if ($('input[name="IsAdmin"]:checked').val() == "true") {
+            document.getElementById("privData").style.display = "block";
+        }
+        else {
+            document.getElementById("privData").style.display = "none";
+
+        }
+    });
+});
+
+
+
+function editUser(form) {
+    var User = {
+        UserId: sessionStorage.getItem("UserId"),
+        FirstName: document.getElementById("fname").value,
+        LastName: document.getElementById("lname").value,
+        Email: document.getElementById("email").value,
+        Age: document.getElementById("age").value,
+        IsAdmin: document.getElementById("IsAdmin").value,
+        AddressesOfTheUser:
+            {
+                Country: document.getElementById("Country").value,
+                City: document.getElementById("City").value,
+                Street: document.getElementById("Street").value,
+                Number: document.getElementById("Number").value
+            },
+        PrivilegesOfTheUser:
+        {
+            PrivilegeId: document.getElementById("PrivilegeId").value
+        }
+    };
+    sessionStorage.setItem("us", JSON.stringify(User));
+    //var xhttp = new XMLHttpRequest();
+    $.ajax({
+        url: "http://localhost:64012/api/users",
+        type: "PUT",
+        dataType: "json",
+        data: JSON.stringify(User),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            tempdata = data;
+            window.location.href = 'http://localhost:57286/html/home.html';
+        },
+        error: function (result) {
+            tempdata = null;
+        }
+    });  //end of the ajax call
+}
+
+
+//main.css
+
+html {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+}
+
+body {
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: #212121;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+
+.table{
+    border-radius:33px;
+	border:4px solid #29668f;
+    border-collapse: collapse;
+    text-align:center;
+    width:auto;
+    position:center;
+}
+
+th, td,tr {
+    padding: 15px;
+    border: 2px solid black;
+    text-align:center;
+    font-size:medium;
+	font-family:Trebuchet MS;
+}
+.delbutton,.editbutton{
+	-moz-box-shadow: -1px 0px 14px 3px #276873;
+	-webkit-box-shadow: -1px 0px 14px 3px #276873;
+	box-shadow: -1px 0px 14px 3px #276873;
+	background-color:#599bb3;
+	-moz-border-radius:33px;
+	-webkit-border-radius:33px;
+	border-radius:33px;
+	border:4px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px 11px;
+	text-shadow:0px 1px 24px #3d768a;
+}
+.editbutton {
+    border: 4px solid black;
+}
+.delbutton,.editbutton:hover {
+	background-color:black;
+}
+.delbutton:hover {
+	background-color:#599bb3;
+}
+.delbutton,.editbutton:active {
+	position:relative;
+	top:1px;
+}
+.wrapper {
+    text-align: center;
+}
+
+#addButton {
+	background-color:transparent;
+	display:inline-block;
+	cursor:pointer;
+	color:#00000b;
+	font-family:Trebuchet MS;
+	font-size:16px;
+	font-weight:bold;
+	padding:10px 13px;
+	text-decoration:none;
+	text-shadow:0px 0px 29px #283966;
+    position:absolute;
+}
+
+#myInput {
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+
+//addEditPage.css
+
+html {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-image: url("http://wallpapercave.com/wp/SVMyCtb.jpg");
+  background-color: floralwhite;
+  text-align:center;
+}
+
+body {
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+  background-image: url("http://wallpapercave.com/wp/SVMyCtb.jpg");
+  background-color: floralwhite;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+input[type=submit]{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
