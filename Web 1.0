@@ -1,0 +1,680 @@
+//html
+
+//home.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Intern 3 Project</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/scripts/home.css">
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/scripts/home.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href='maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <hr class="hr-primary" />
+            <ol class="breadcrumb bread-primary ">
+                <li><a href="https://www.linkedin.com/in/avram-lavinia-mihaela-392550149">Intern 3 TECSS</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="about.html">About</a></li>
+            </ol>
+        </div>
+    </div>
+        <img src="https://ecommerce.payulatam.com/pagina/callcenter.png" id="userimg">
+
+</body>
+</html>
+
+
+//users.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+	<meta charset="utf-8" />
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/style.css">
+    <script src="/scripts/users.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <hr class="hr-primary" />
+            <ol class="breadcrumb bread-primary ">
+                <li><a href="https://www.linkedin.com/in/avram-lavinia-mihaela-392550149">Intern 3 TECSS</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="about.html">About</a></li>
+            </ol>
+        </div>
+    </div>
+    <div style="text-align:center" class="container">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for First name..">
+        <table class="table" id="users_table">
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Admin</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="sortable"></tbody>
+        </table>
+    </div>  
+
+    <div class="wrapper">
+        <button type="button" onclick="location.href = 'PostAndPut.html'" id="addButton">Register!</button>
+    </div>
+
+</body>
+</html>
+
+//about.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+	<meta charset="utf-8" />
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/about.css">
+    <script src="/scripts/about.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <hr class="hr-primary" />
+            <ol class="breadcrumb bread-primary ">
+                <li><a href="https://www.linkedin.com/in/avram-lavinia-mihaela-392550149">Intern 3 TECSS</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="about.html">About</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="Bio">
+        <ul style="list-style: none;">
+            <li>Avram Lavinia Mihaela</li>
+            <li>Student at Tehnical Univeristy of Cluj-Napoca</li>
+            <li>Faculty of Electronics, Telecomunications and Information Technology</li>
+            <li>First year</li>
+            <li>Intern at TEC Software Solutions</li>
+            <li>Supervisors: Farcas Sebastian, Potinteu Claudiu</li>
+        </ul>
+    </div>
+    <div class="tecssimg">
+        <img src="http://tecss.com/wp-content/uploads/2016/12/tecss-755-2016.png" />
+    </div>
+</body>
+</html>
+
+
+
+//postandput.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit</title>
+    <meta charset="utf-8" />
+    <script src="/scripts/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://localhost:57286/scripts/jquery-1.9.1.js"></script>
+    <script src="/scripts/jquery.serializejson.js"></script>
+    <script src="../JSobjects/JSUser.js"></script>
+    <script src="../JSobjects/JSAddress.js"></script>
+    <script src="../JSobjects/JSPriv.js"></script>
+    <script src="/scripts/addEditJS.js"></script>
+    <link rel="stylesheet" type="text/css" href="/scripts/addEditPage.css">
+</head>
+
+<body>
+    <h1>Please complete the following fields!</h1>
+    <form name="myform" method='post' autocomplete="off" id="myform">
+        <p class="generalData">
+            First name:<br><input type="text" id="fname" name="FirstName" required><br>
+            Last name:<br><input type="text" id="lname" name="LastName" required><br>
+            E-mail: <br><input type="email" id="email" name="Email" required placeholder="Enter a valid email address"><br>
+            Age: <br><input type="number" id="age" name="Age" min="18" max="120" required><br>
+        </p>
+        <p class="accessData">
+            User type:<br>
+            <label> Admin <input id="IsAdmin" type="radio" name="IsAdmin" value="true"> </label>
+            <label> Not Admin <input id="IsAdmin" type="radio" name="IsAdmin" value="false"> </label>
+            <label> Undefined <input id="IsAdmin" type="radio" name="IsAdmin" value="null"> </label>
+        </p>
+        <br><br>
+        Address<br>
+        Country:<br> <input type="text" id="Country" name="Country" required><br>
+        City:<br> <input type="text" id="City" name="City" required><br>
+        Street:<br> <input type="text" id="Street" name="Street" required><br>
+        Number: <br><input type="number" id="Number" min="1" name="Number" required><br>
+        <br><br>
+        <p id="privData">
+            User Privilege:<br>
+            <label> Read <input id="PrivilegeId" type="radio" name="PrivilegeId" value="4" checked> </label>
+            <label id="label2" style ="display:none">  Write <input id="PrivilegeId" type="radio" name="PrivilegeId" value="5" /> </label>
+            <label id ="label3" style="display:none"> Execute <input id="PrivilegeId" type="radio" name="PrivilegeId" value="6" /> </label>
+            <br><br>
+            </p>
+            <input type="button" value="Submit" onclick="addUser(this)" id="submitButton" name="submitb"  disabled/>
+            <input type='button' value="Edit" onclick="editUser(this)" id="updateButton">
+</form>
+
+</body>
+</html>
+
+
+//JSObjects
+//JSUser.js
+function JSUser(FirstName,LastName,Email,Age)
+{
+    this.FirstName = FirstName;
+    this.LastName = LastName;
+    this.Email = Email;
+    this.Age = Age;
+    AddressesOfTheUser =[];
+    PrivilegesOfTheUser = [];
+}
+
+//JSAddress.js
+function JSAddress(Country,City,Street,Number)
+{
+    this.Country = Country;
+    this.City =City;
+    this.Street = Street;
+    this.Number = Number;
+}
+
+//JSPriv.js
+function PrivOfTheUs(PrivilegeId) {
+    this.PrivilegeId = PrivilegeId
+}
+
+//JS
+//users.js
+var allusers;
+//display the users in home.html
+$(document).ready(function () {
+    $.getJSON("http://localhost:64012/api/users", function (data) {
+        var users_data;
+        allusers = data;
+        $.each(data, function (key, value) {
+            users_data = $('<tr/>');
+            users_data.append("<td>" + value.UserId + "</td>");
+            users_data.append("<td>" + value.FirstName + "</td>");
+            users_data.append("<td>" + value.LastName + "</td>");
+            users_data.append("<td>" + value.Email + "</td>");
+            users_data.append("<td>" + value.Age + "</td>");
+            users_data.append("<td>" + value.IsAdmin + "</td>");
+            users_data.append("<td> <button class='delbutton' id='deleteButton' onClick='popupDelete(this)'>Delete</button> <button class='editbutton' id='editButton' onclick='Redirect(this)' >Edit</button></td>");
+            $('#users_table').append(users_data);
+        });
+    });
+    $(function () {
+        $("#sortable").sortable();
+    });
+});
+
+function myFunction() {
+    // Declare variables 
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("users_table");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// When the user clicks on delete, open the popup
+function popupDelete(a) {
+    var table = document.getElementById("users_table");
+    var row = a.parentElement.parentElement.rowIndex;
+    var userid = table.rows[row].cells[0].innerHTML;
+    if (confirm("ALERT! If you press ok the user will be deleted!") == true) {
+        table.deleteRow(row);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("DELETE", "http://localhost:64012/api/users/" + userid, true);
+        xhttp.send();
+    }
+}
+
+
+function Redirect(b) {
+    var table = document.getElementById("users_table");
+    window.location.href = "http://localhost:57286/html/PostAndPut.html?Edit=true";
+    var row = b.parentElement.parentElement.rowIndex;
+    var userid = table.rows[row].cells[0].innerHTML;
+
+    for (var i = 0; i < allusers.length; i++) {
+        if (userid == allusers[i].UserId) {
+            sessionStorage.setItem("UserId", allusers[i].UserId);
+            sessionStorage.setItem("FirstName", allusers[i].FirstName);
+            sessionStorage.setItem("LastName", allusers[i].LastName);
+            sessionStorage.setItem("Email", allusers[i].Email);
+            sessionStorage.setItem("Age", allusers[i].Age);
+            sessionStorage.setItem("IsAdmin", allusers[i].IsAdmin);
+            for (var j = 0; j < allusers[i].AddressesOfTheUser.length; j++) {
+                sessionStorage.setItem("Country", allusers[i].AddressesOfTheUser[j].Country);
+                sessionStorage.setItem("City", allusers[i].AddressesOfTheUser[j].City);
+                sessionStorage.setItem("Street", allusers[i].AddressesOfTheUser[j].Street);
+                sessionStorage.setItem("Number", allusers[i].AddressesOfTheUser[j].Number);
+            }
+            for (var k = 0; k < allusers[i].PrivilegesOfTheUser.length; k++) {
+                sessionStorage.setItem("PrivilegeId", allusers[i].PrivilegesOfTheUser[k].PrivilegeId);
+            }
+        }
+    }
+}
+
+
+//addedit.js
+function addUser(form) {
+    document.getElementById("submitButton").style.display = "block";
+    var user = new JSUser();
+    var AddressesOfThUser = new JSAddress();
+    user.FirstName = document.getElementById("fname").value;
+    user.LastName = document.getElementById("lname").value;
+    user.Email = document.getElementById("email").value;
+    user.Age = document.getElementById("age").value;
+    user.IsAdmin = $('input[name="IsAdmin"]:checked').val();
+
+    var adrObj = {};
+    adrObj.Country = document.getElementById("Country").value;
+    adrObj.City = document.getElementById("City").value;
+    adrObj.Street = document.getElementById("Street").value;
+    adrObj.Number = document.getElementById("Number").value;
+    user.AddressesOfTheUser = [];
+    user.AddressesOfTheUser.push(adrObj);
+    var privObj = {};
+    privObj.PrivilegeId = $('input[name="PrivilegeId"]:checked').val();
+    user.PrivilegesOfTheUser = [];
+    user.PrivilegesOfTheUser.push(privObj);
+
+    $.ajax({
+        url: "http://localhost:64012/api/users",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(user),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            tempdata = data;
+            window.location.href = 'http://localhost:57286/html/users.html'
+        },
+        error: function (result) {
+            tempdata = null;
+        }
+    });  //end of the ajax call
+}
+
+
+
+$(document).ready(function () {
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has('Edit') && urlParams.get('Edit') == "true") {
+        document.getElementById("fname").value = sessionStorage.getItem("FirstName");
+        document.getElementById("lname").value = sessionStorage.getItem("LastName");
+        document.getElementById("email").value = sessionStorage.getItem("Email");
+        document.getElementById("age").value = sessionStorage.getItem("Age");
+        document.myform.IsAdmin.value = sessionStorage.getItem("IsAdmin")
+        document.getElementById("Country").value = sessionStorage.getItem("Country");
+        document.getElementById("City").value = sessionStorage.getItem("City");
+        document.getElementById("Street").value = sessionStorage.getItem("Street");
+        document.getElementById("Number").value = sessionStorage.getItem("Number");
+        document.myform.PrivilegeId.value = sessionStorage.getItem("PrivilegeId");
+    }
+    
+    $("input").on("keyup focus", function () {
+        FirstName = document.getElementById("fname").value;
+        LastName = document.getElementById("lname").value;
+        Email = document.getElementById("email").value;
+        Age = document.getElementById("age").value;
+        if (FirstName == null || FirstName == "" ||
+             LastName == null || LastName == "" ||
+             Email == null || Email == "" ||
+            validateEmail(Email)==false||
+             Age == null || Age == ""||
+            $('input[name="IsAdmin"]:checked').val()==null
+            ) {
+            document.getElementById("submitButton").disabled = true;
+        }
+        else {
+            document.getElementById("submitButton").disabled = false;
+        }
+    });
+
+    $("#myform").submit(function () {
+        return false;
+    });
+
+    $("input[type=radio]").on("click", function () {
+        Email = document.getElementById("email").value;
+        if (validateEmail == false)
+        {
+            document.getElementById("submitButton").disabled = true;
+        }
+        else {
+            document.getElementById("submitButton").disabled = false;
+        }
+        if ($('input[name="IsAdmin"]:checked').val() == "true") {
+            document.getElementById("label2").style.display = "block";
+            document.getElementById("label3").style.display = "block";
+        }
+        else {
+            document.getElementById("label2").style.display = "none";
+            document.getElementById("label3").style.display = "none";
+        }
+    });
+});
+
+
+
+function editUser(form) {
+    var User = {
+        UserId: sessionStorage.getItem("UserId"),
+        FirstName: document.getElementById("fname").value,
+        LastName: document.getElementById("lname").value,
+        Email: document.getElementById("email").value,
+        Age: document.getElementById("age").value,
+        IsAdmin: $('input[name="IsAdmin"]:checked').val(),
+        AddressesOfTheUser:
+            {
+                Country: document.getElementById("Country").value,
+                City: document.getElementById("City").value,
+                Street: document.getElementById("Street").value,
+                Number: document.getElementById("Number").value
+            },
+        PrivilegesOfTheUser:
+        {
+            PrivilegeId: $('input[name="IsAdmin"]:checked').val()
+        }
+    };
+    sessionStorage.setItem("us", JSON.stringify(User));
+    //var xhttp = new XMLHttpRequest();
+    $.ajax({
+        url: "http://localhost:64012/api/users",
+        type: "PUT",
+        dataType: "json",
+        data: JSON.stringify(User),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            tempdata = data;
+            window.location.href = 'http://localhost:57286/html/users.html';
+        },
+        error: function (result) {
+            tempdata = null;
+        }
+    });  //end of the ajax call
+}
+
+
+function validateEmail($email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test($email);
+}
+
+
+
+//css
+//home.css
+html,body{
+           background-color: deepskyblue;
+}
+#userimg{
+     background-color: deepskyblue;
+     position:fixed;
+    left:40%;
+    top:20%;
+     width:20%;
+}
+navbar-header, collapse navbar-collapse {
+    background-color: deepskyblue;
+}
+hr {
+  height: 4px;
+  margin-left: 15px;
+  margin-bottom:-3px;
+}
+.hr-warning{
+  background-image: -webkit-linear-gradient(left, rgba(210,105,30,.8), rgba(210,105,30,.6), rgba(0,0,0,0));
+}
+.hr-success{
+  background-image: -webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0));
+}
+.hr-primary{
+  background-image: -webkit-linear-gradient(left, rgba(66,133,244,.8), rgba(66, 133, 244,.6), rgba(0,0,0,0));
+}
+.hr-danger{
+  background-image: -webkit-linear-gradient(left, rgba(244,67,54,.8), rgba(244,67,54,.6), rgba(0,0,0,0));
+}
+
+.breadcrumb {
+  background: rgba(245, 245, 245, 0); 
+  border: 0px solid rgba(245, 245, 245, 1); 
+  border-radius: 25px; 
+  display: block;
+}
+
+.btn-bread{
+    margin-top:10px;
+    font-size: 12px;
+    
+    border-radius: 3px;
+}
+
+//users.css
+
+html {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+}
+
+body {
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: #212121;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+
+.table{
+    border-radius:33px;
+	border:4px solid #29668f;
+    border-collapse: collapse;
+    text-align:center;
+    width:auto;
+    position:center;
+}
+
+th, td,tr {
+    padding: 15px;
+    border: 2px solid black;
+    text-align:center;
+    font-size:medium;
+	font-family:Trebuchet MS;
+}
+.delbutton,.editbutton{
+	-moz-box-shadow: -1px 0px 14px 3px #276873;
+	-webkit-box-shadow: -1px 0px 14px 3px #276873;
+	box-shadow: -1px 0px 14px 3px #276873;
+	background-color:#599bb3;
+	-moz-border-radius:33px;
+	-webkit-border-radius:33px;
+	border-radius:33px;
+	border:4px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:14px;
+	font-weight:bold;
+	padding:4px 11px;
+	text-shadow:0px 1px 24px #3d768a;
+}
+.editbutton {
+    border: 4px solid black;
+}
+.delbutton,.editbutton:hover {
+	background-color:black;
+}
+.delbutton:hover {
+	background-color:#599bb3;
+}
+.delbutton,.editbutton:active {
+	position:relative;
+	top:1px;
+}
+.wrapper {
+    text-align: center;
+}
+
+#addButton {
+	background-color:transparent;
+	display:inline-block;
+	cursor:pointer;
+	color:#00000b;
+	font-family:Trebuchet MS;
+	font-size:16px;
+	font-weight:bold;
+	padding:10px 13px;
+	text-decoration:none;
+	text-shadow:0px 0px 29px #283966;
+    position:absolute;
+}
+
+#myInput {
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+//addedit.css
+
+html {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-image: url("http://wallpapercave.com/wp/SVMyCtb.jpg");
+  background-color: floralwhite;
+  text-align:center;
+}
+
+body {
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+  background-image: url("http://wallpapercave.com/wp/SVMyCtb.jpg");
+  background-color: floralwhite;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+//about.css
+
+html {
+  position: relative;
+
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+}
+
+body {
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #212121;
+  background-image: url("http://deskbg.com/s3/wpp/0/416/abstract-white-desktop-background.jpg");
+  background-color: floralwhite;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.tecssimg{
+position:fixed;
+    height: 10em;
+    top: 50%;
+    left: 20%;
+    justify-content: center;
+    width:60%;
+}
+
+ul{
+    position:center;
+}
+
+li{
+  color:darkblue;
+  text-align: center;
+  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+
